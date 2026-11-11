@@ -1,0 +1,22 @@
+name: job_auditor
+
+profile: job_auditor
+
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  job_auditor:
+    +persist_docs:
+      relation: true
+      columns: true
+    staging:
+      +materialized: view
+      +schema: staging
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+    marts:
+      +materialized: table
+      +schema: marts

@@ -1,0 +1,14 @@
+models:
+  - name: stg_postings
+    description: >
+      One row per posting per scrape day. Scraper error rows are removed;
+      a job scraped on many days keeps every row.
+    columns:
+      - name: job_id
+        description: "Posting id from the scraper. Can be NULL, and one job repeats across scrape days."
+      - name: company_name
+        description: "Name as posted. Some names are job boards, not employers."
+      - name: job_location
+        description: "Location text from the posting. NULL when the posting gives none."
+      - name: pay_unit
+        description: "Last word of job_salary: year, hour, month, day or week. NULL when there is no salary."

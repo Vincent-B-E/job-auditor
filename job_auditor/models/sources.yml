@@ -1,0 +1,9 @@
+sources:
+  - name: jobs
+    database: raw
+    schema: jobs
+    tables:
+      - name: raw_job_postings
+        description: "One row per posting per scrape event, shared with dbt-databricks-pipeline."
+      - name: raw_job_skills
+        description: "One row per skill keyword found in a posting."
