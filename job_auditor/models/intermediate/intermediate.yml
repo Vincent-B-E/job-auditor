@@ -1,0 +1,13 @@
+models:
+  - name: int_job_scrapes
+    columns:
+      - name: job_id
+        data_tests:
+          - unique
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_skills')
+                field: job_id
+              config:
+                severity: warn

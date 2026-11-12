@@ -8,7 +8,35 @@ models:
         description: "Posting id from the scraper. Can be NULL, and one job repeats across scrape days."
       - name: company_name
         description: "Name as posted. Some names are job boards, not employers."
+        data_tests:
+          - not_blank
       - name: job_location
         description: "Location text from the posting. NULL when the posting gives none."
+        data_tests:
+          - not_null:
+              config:
+                severity: warn
       - name: pay_unit
         description: "Last word of job_salary: year, hour, month, day or week. NULL when there is no salary."
+      - name: pay_unit
+        description: "Last word of job_salary: year, hour, month, day or week. NULL when there is no salary."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: ['year', 'hour', 'month', 'day', 'week']        
+      - name: job_title
+        data_tests:
+          - not_blank
+      - name: source_platform
+        data_tests:
+          - not_blank
+
+  - name: stg_skills
+    columns:
+      - name: job_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('stg_postings')
+                field: job_id

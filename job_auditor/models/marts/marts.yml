@@ -1,0 +1,7 @@
+models:
+  - name: fct_daily_scrapes
+    columns:
+      - name: search_date
+        data_tests:
+          - unique
+          - not_null
