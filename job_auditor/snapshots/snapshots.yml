@@ -1,0 +1,12 @@
+snapshots:
+  - name: job_terms_snapshot
+    relation: ref('stg_terms_current')
+    description: "History of each posting's schedule type and remote flag, one row per version"
+    config:
+      schema: snapshots
+      strategy: check
+      unique_key: job_id
+      check_cols:
+        - job_schedule_type
+        - is_remote
+      updated_at: searched_at
