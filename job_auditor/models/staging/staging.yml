@@ -40,3 +40,19 @@ models:
               arguments:
                 to: ref('stg_postings')
                 field: job_id
+
+unit_tests:
+  - name: test_staging_filters
+    description: "Error rows and rows without a job_id stay out; the via prefix comes off"
+    model: stg_postings
+    given:
+      - input: source('jobs', 'raw_job_postings')
+        rows:
+          - {job_id: "a1", job_via: "via LinkedIn", error: true}
+          - {job_id: null, job_via: "via Indeed"}
+          - {job_id: "b2", job_via: "via LinkedIn"}
+          - {job_id: "c3", job_via: "Indeed"}
+    expect:
+      rows:
+        - {job_id: "b2", source_platform: "LinkedIn"}
+        - {job_id: "c3", source_platform: "Indeed"}
