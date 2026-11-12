@@ -3,3 +3,5 @@ dbt_packages/
 dbt_internal_packages/
 logs/
 .env
+
+history_query.sql
